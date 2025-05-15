@@ -1,0 +1,60 @@
+import random
+    
+print('Input how many flips you want in each simulation.')
+
+
+amountOfFlips = int(input())
+
+def flipFunction():
+    flipset = []
+    i = 1
+    headsInRow = 0
+    tailsInRow = 0
+    headStreakCounter = 0
+    tailStreakCounter = 0
+    
+    for i in range(amountOfFlips):
+        flipset.append(random.randint(0,1))
+
+    for item in flipset:
+        if item == 0:
+            headsInRow += 1
+            tailsInRow = 0
+            if headsInRow == 6:
+                headStreakCounter += 1
+                headsInRow = 0
+        else:
+            tailsInRow += 1
+            headsInRow = 0
+            if tailsInRow == 6:
+                tailStreakCounter +=1
+                tailsInRow = 0
+
+    return headStreakCounter, tailStreakCounter
+    
+flipFunction()
+
+print('You have conducted ' + str(amountOfFlips) + ' flips.')
+
+print('How many simulations do you wish to run?')
+
+amountOfSim = int(input())
+
+def simTrials():
+    totalHeadStreaks = 0
+    totalTailStreaks = 0
+    
+    i = 0
+    for i in range(amountOfSim):
+        h, t = flipFunction()
+        totalHeadStreaks += h
+        totalTailStreaks += t
+    
+    print("\n--- Simulation Complete ---")
+    print("Total flips:", amountOfFlips * amountOfSim)
+    print("Total simulations:", amountOfSim)
+    print("Total head streaks of 6:", totalHeadStreaks)
+    print("Total tail streaks of 6:", totalTailStreaks)
+
+
+simTrials()
